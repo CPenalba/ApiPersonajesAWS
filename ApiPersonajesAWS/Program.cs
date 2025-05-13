@@ -24,8 +24,13 @@ if (app.Environment.IsDevelopment())
 {
     
 }
+app.MapScalarApiReference(opt =>
+{
+    opt.Title = "Scalar Personajes";
+    opt.Theme = ScalarTheme.BluePlanet;
+});
+
 app.UseCors("corsenabled");
-app.MapScalarApiReference();
 app.MapOpenApi();
 app.UseHttpsRedirection();
 

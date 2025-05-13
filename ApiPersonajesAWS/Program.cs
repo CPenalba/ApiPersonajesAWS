@@ -4,7 +4,10 @@ using Microsoft.EntityFrameworkCore;
 using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
-
+builder.Services.AddCors(p => p.AddPolicy("corsenabled", options =>
+{
+    options.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
+}));
 // Add services to the container.
 string connectionString = builder.Configuration.GetConnectionString("MySql");
 builder.Services.AddTransient<RepositoryPersonajes>();
@@ -21,6 +24,7 @@ if (app.Environment.IsDevelopment())
 {
     
 }
+app.UseCors("corsenabled");
 app.MapScalarApiReference();
 app.MapOpenApi();
 app.UseHttpsRedirection();

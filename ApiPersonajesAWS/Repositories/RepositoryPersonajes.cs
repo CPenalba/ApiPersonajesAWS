@@ -32,5 +32,17 @@ namespace ApiPersonajesAWS.Repositories
             await this.context.Personajes.AddAsync(p);
             await this.context.SaveChangesAsync();
         }
+
+        public async Task UpdatePersonajeAsync(int id, string nombre, string imagen)
+        {
+            Personaje personaje = await this.context.Personajes.FindAsync(id);
+            if (personaje != null)
+            {
+                personaje.Nombre = nombre;
+                personaje.Imagen = imagen;
+                await this.context.SaveChangesAsync();
+            }
+        }
+
     }
 }
